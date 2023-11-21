@@ -5,8 +5,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CheckCircle } from 'components/sharedComponents/icons/Icons';
 
 const propTypes = {
@@ -31,6 +29,7 @@ export default class ModalContent extends React.Component {
     }
 
     onCopy() {
+        window.navigator.clipboard.writeText(this.props.expectedFile);
         this.setState({
             copied: true
         });
@@ -42,6 +41,7 @@ export default class ModalContent extends React.Component {
                 <CheckCircle />
             </div>
         );
+
         return (
             <div className="download-status-screen">
                 <div className="main-title">
@@ -52,15 +52,10 @@ export default class ModalContent extends React.Component {
                     <div className="link-box">
                         <p>Once your download is ready, you can use this link to access it anytime</p>
                         <div className="link">{this.props.expectedFile}</div>
-
-                        <CopyToClipboard
-                            text={this.props.expectedFile}
-                            onCopy={this.onCopy}>
-                            <button>
-                                {this.state.copied ? <span>{icon}</span> : null}
-                                {this.state.copied ? 'Copied' : 'Copy Link'}
-                            </button>
-                        </CopyToClipboard>
+                        <button onClick={this.onCopy}>
+                            {this.state.copied ? <span>{icon}</span> : null}
+                            {this.state.copied ? 'Copied' : 'Copy Link'}
+                        </button>
                     </div>
                     <div className="sub-details">
                         To keep browsing, close this box; your download status will appear at the bottom of the screen.

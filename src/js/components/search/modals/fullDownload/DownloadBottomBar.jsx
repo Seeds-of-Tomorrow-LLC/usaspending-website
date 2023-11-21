@@ -7,7 +7,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ExclamationCircle, CheckCircle } from 'components/sharedComponents/icons/Icons';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const propTypes = {
     showError: PropTypes.bool,
@@ -41,6 +40,7 @@ export default class DownloadBottomBar extends React.Component {
     }
 
     onCopy() {
+        window.navigator.clipboard.writeText(this.props.download.expectedUrl);
         this.setState({
             copied: true
         });
@@ -75,11 +75,9 @@ export default class DownloadBottomBar extends React.Component {
                             {this.props.description}
                         </p>
                         {this.state.copied ? <span>{icon}</span> : null}
-                        <CopyToClipboard
-                            text={this.props.download.expectedUrl}
-                            onCopy={this.onCopy}>
-                            <button>{this.state.copied ? 'Copied' : 'Your Download Link'}</button>
-                        </CopyToClipboard>
+                        <button onClick={this.onCopy}>
+                            {this.state.copied ? 'Copied' : 'Your Download Link'}
+                        </button>
                     </div>
                 </div>
             </div>
