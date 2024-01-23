@@ -4,7 +4,7 @@
 // see: https://github.com/airbnb/javascript
 {
     "extends": "airbnb",
-    "parser": "@babel/eslint-parser",
+    "parser": "@",
     "parserOptions": {
       "ecmaVersion": 2022,
       "presets": ["@babel/preset-react"]
